@@ -1,6 +1,7 @@
 // Step 1: Import React
 import * as React from "react";
 import Layout from "../layout";
+import SEO from "../feature/seo";
 
 // Step 2: Define your component
 const AboutPage = () => {
@@ -17,13 +18,7 @@ const AboutPage = () => {
 // https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
 // https://www.gatsbyjs.com/docs/how-to/adding-common-features/adding-seo-component/
 export const Head = () => {
-  return (
-    <>
-      <title>About me</title>
-      <meta name="Description" content="This is a page about me" />
-      <meta name="Keywords" content="gatsby, react, tutorial" />
-    </>
-  );
+  return <SEO title="About Me" />;
 };
 
 // Step 3: Export your component

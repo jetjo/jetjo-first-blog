@@ -6,11 +6,16 @@ import {
   navLinks,
   navLinkItem,
   navLinkText,
+  siteTitle,
 } from "./index.module.css";
 
+import { useSiteMeta } from "../feature/use-site-meta";
+
 export default function Layout({ pageTitle, children }) {
+  const { meta } = useSiteMeta();
   return (
     <div className={container}>
+      <header className={siteTitle}> {meta.title} </header>
       <nav>
         <ul className={navLinks}>
           <li className={navLinkItem}>
@@ -21,6 +26,11 @@ export default function Layout({ pageTitle, children }) {
           <li className={navLinkItem}>
             <Link className={navLinkText} to="/about">
               About
+            </Link>
+          </li>
+          <li className={navLinkItem}>
+            <Link className={navLinkText} to="/blog-list">
+              Blogs
             </Link>
           </li>
         </ul>
