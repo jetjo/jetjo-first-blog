@@ -26,16 +26,16 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^20.11.19
-    version: 20.11.27
+    specifier: ^20.11.28
+    version: 20.11.28
   '@types/react':
-    specifier: ^18.2.55
+    specifier: ^18.2.66
     version: 18.2.66
   '@types/react-dom':
-    specifier: ^18.2.19
+    specifier: ^18.2.22
     version: 18.2.22
   typescript:
-    specifier: ^5.3.3
+    specifier: ^5.4.2
     version: 5.4.2
 
 packages:
@@ -2673,7 +2673,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       '@types/responselike': 1.0.3
     dev: false
 
@@ -2692,7 +2692,7 @@ packages:
   /@types/cors@2.8.17:
     resolution: {integrity: sha512-8CGDvrBj1zgo2qE+oS3pOCyYNqCPryMWY2bGfwA0dcfopWGgxs+78df0Rs3rc9THP4JkOhLsAa+15VdpAqkcUA==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/debug@0.0.30:
@@ -2732,7 +2732,7 @@ packages:
     resolution: {integrity: sha512-rTtf75rwyP9G2qO5yRpYtdJ6aU1QqEhWbtW55qEgquEDa6bXW0s2TWZfDm02GuppjEozOWG/F2UnPq5hAQb+gw==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/http-cache-semantics@4.0.4:
@@ -2742,7 +2742,7 @@ packages:
   /@types/http-proxy@1.17.14:
     resolution: {integrity: sha512-SSrD0c1OQzlFX7pGu1eXxSEjemej64aaNPRhhVYUGqXh0BtldAAx37MG8btcumvpgKyZp1F5Gn3JkktdxiFv6w==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/json-schema@7.0.15:
@@ -2756,7 +2756,7 @@ packages:
   /@types/keyv@3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/lodash@4.17.0:
@@ -2770,18 +2770,18 @@ packages:
   /@types/mkdirp@0.5.2:
     resolution: {integrity: sha512-U5icWpv7YnZYGsN4/cmh3WD2onMY0aJIiTE6+51TwJCttdHvtCYmkBNOobHlXwrJRL0nkH9jH4kD+1FAdMN4Tg==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/node-fetch@2.6.11:
     resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       form-data: 4.0.0
     dev: false
 
-  /@types/node@20.11.27:
-    resolution: {integrity: sha512-qyUZfMnCg1KEz57r7pzFtSGt49f6RPkPBis3Vo4PbS7roQEDn22hiHzl/Lo1q4i4hDEgBJmBF/NTNg2XR0HbFg==}
+  /@types/node@20.11.28:
+    resolution: {integrity: sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2818,14 +2818,14 @@ packages:
   /@types/responselike@1.0.3:
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/rimraf@2.0.5:
     resolution: {integrity: sha512-YyP+VfeaqAyFmXoTh3HChxOQMyjByRMsHU7kc5KOJkSlXudhMhQIALbYV7rHh/l8d2lX3VUQzprrcAgWdRuU8g==}
     dependencies:
       '@types/glob': 5.0.38
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
     dev: false
 
   /@types/scheduler@0.16.8:
@@ -4862,7 +4862,7 @@ packages:
     dependencies:
       '@types/cookie': 0.4.1
       '@types/cors': 2.8.17
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       accepts: 1.3.8
       base64id: 2.0.0
       cookie: 0.4.2
@@ -7301,7 +7301,7 @@ packages:
     resolution: {integrity: sha512-KWYVV1c4i+jbMpaBC+U++4Va0cp8OisU185o73T1vo99hqi7w8tSJfUXYswwqqrjzwxa6KpRK54WhPvwf5w6PQ==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       merge-stream: 2.0.0
       supports-color: 7.2.0
     dev: false
@@ -7310,7 +7310,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 20.11.27
+      '@types/node': 20.11.28
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: false

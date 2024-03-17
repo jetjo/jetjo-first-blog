@@ -1,17 +1,16 @@
 import { createRequire } from "module";
 import { fileURLToPath } from "url";
 import { opendir } from "node:fs/promises";
-import path, { dirname } from "path";
+import path_, { dirname } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const __require = createRequire(import.meta.url);
 
-export function withContext(require = __require) {
+export function withContext(require = createRequire(import.meta.url)) {
   require.context = async (pathDir, recursive = true, glob) => {
     const keys = [];
 
     try {
-      const dir = await opendir(path.resolve(__dirname, pathDir), {
+      const dir = await opendir(path_.resolve(__dirname, pathDir), {
         encoding: "utf8",
         withFileTypes: true,
         recursive,
@@ -23,7 +22,7 @@ export function withContext(require = __require) {
             "d.path is undefined, 需要 node v20.1.0 或更高版本。"
           );
         }
-        const p = path.resolve(d.path, d.name);
+        const p = path_.resolve(d.path, d.name);
         if (!d.isFile()) continue;
         if (glob && !glob.test(p)) continue;
         keys.push(p);
@@ -32,29 +31,28 @@ export function withContext(require = __require) {
       console.error(err);
     }
 
-    return { keys: () => keys };
+    // return { keys: () => keys };
+    const require = createRequire(import.meta.url);
+    require.keys = () => keys;
+    return require;
   };
 
   return require;
 }
 
-const require = withContext();
-function getPagePath(templatePath = "", baseDir = "") {
-  const r1 = templatePath.slice(baseDir.length);
-  const r2 = r1.slice(0, r1.indexOf("."));
-  return { path: r2, name: r2.slice(1).replaceAll("/", "-") };
-}
-
 export async function getContext(dir, glob) {
-  const pageTemplateDir = path.resolve(import.meta.dirname, dir);
+  const absDir = path_.resolve(import.meta.dirname, dir);
 
-  const nodes = await require.context(pageTemplateDir, true, glob);
+  const getPath = (fullPath = "") => {
+    const relP = fullPath.slice(absDir.length);
+    const path = relP.slice(0, relP.indexOf("."));
+    return { path, name: path.slice(1).replaceAll(/[\\\/\.\s]+/g, "-") };
+  };
 
-  return nodes.keys().map((key) => ({
+  const context = await withContext().context(absDir, true, glob);
+  return context.keys().map((key) => ({
     fullPath: key,
-    ...getPagePath(key, pageTemplateDir),
+    ...getPath(key, absDir),
     // name: key.match(/\/([^\/\.]+)(?:\..*)+$/)[1],
   }));
-
-  // console.log(pageTemplatesCtx, '+++++++++++++++++++++++');
 }
