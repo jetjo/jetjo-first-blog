@@ -5,7 +5,7 @@ import path_, { dirname } from "path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export function withContext(require = createRequire(import.meta.url)) {
+export function withWebpackContext(require = createRequire(import.meta.url)) {
   require.context = async (pathDir, recursive = true, glob) => {
     const keys = [];
 
@@ -40,19 +40,25 @@ export function withContext(require = createRequire(import.meta.url)) {
   return require;
 }
 
-export async function getContext(dir, glob) {
+/**
+ * @returns {Promise<import('./gatsby-config').Context[]>}
+ */
+export async function getContext(dir, glob, { isSubPath, basePath } = {}) {
   const absDir = path_.resolve(import.meta.dirname, dir);
 
   const getPath = (fullPath = "") => {
     const relP = fullPath.slice(absDir.length);
     const path = relP.slice(0, relP.indexOf("."));
-    return { path, name: path.slice(1).replaceAll(/[\\\/\.\s]+/g, "-") };
+    return {
+      path: isSubPath ? basePath + path : path,
+      name: path.slice(1).replaceAll(/[\\\/\.\s]+/g, "-"),
+    };
   };
 
-  const context = await withContext().context(absDir, true, glob);
+  const context = await withWebpackContext().context(absDir, true, glob);
   return context.keys().map((key) => ({
     fullPath: key,
     ...getPath(key, absDir),
     // name: key.match(/\/([^\/\.]+)(?:\..*)+$/)[1],
-  }));
+  })); // as Context[];
 }
