@@ -11,7 +11,13 @@ import {
 
 import { useSiteMeta } from "../feature/use-site-meta";
 
-export default function Layout({ pageTitle, children }) {
+export default function Layout({
+  pageTitle,
+  children,
+}: {
+  pageTitle?: string;
+  children: React.ReactNode;
+}) {
   const { meta } = useSiteMeta();
   return (
     <div className={container}>
@@ -36,7 +42,7 @@ export default function Layout({ pageTitle, children }) {
         </ul>
       </nav>
       <main>
-        <h1 className={heading}>{pageTitle}</h1>
+        {pageTitle && <h1 className={heading}>{pageTitle}</h1>}
         {children}
       </main>
     </div>

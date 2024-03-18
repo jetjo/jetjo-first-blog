@@ -8,11 +8,16 @@ async function compile(path) {
   return String(compiled);
 }
 
+/** @typedef {import('../gatsby-config').Context} Context */
+/** @typedef {import('../src/utils/mdx/eval').Node} Node */
 /**
- * @param {import('../gatsby-config').Context[]} ctxs
- * @returns {Promise<import('../src/utils/mdx/eval.mts').Node[]>}
+ * @param {Context[]|Context} ctxs
+ * @returns {Promise<Node[]|Node>}
  */
 export async function compileMDX(ctxs) {
+  if (!Array.isArray(ctxs)) {
+    return { code: await compile(ctxs.fullPath), ...ctxs };
+  }
   const nodes = [];
   for (const ctx of ctxs) {
     nodes.push({ code: await compile(ctx.fullPath), ...ctx });

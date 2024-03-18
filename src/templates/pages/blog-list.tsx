@@ -1,32 +1,11 @@
+import _path from "path";
 import * as React from "react";
 import SEO from "../../feature/seo";
 import Layout from "../../layout";
-// import { resolve } from "url";
-import { loadCom_ } from "../../utils/mdx/eval.mts";
-import { parseMDXHeader } from "../../utils/mdx/compile.mjs";
-import type { MDXContent } from "../../utils/mdx/eval.mts";
-
-function genCom_(context) {
-  function BlogHeader2(prop) {
-    const { title, slug, date } = JSON.parse(parseMDXHeader(prop.children));
-    return (
-      <div>
-        <a href={context.path}>
-          <h2>{title}</h2>
-        </a>
-        <p>Posted: {date}</p>
-        {/* <p>{slug}</p> */}
-      </div>
-    );
-  }
-
-  const _createMdxContentComps = {
-    h2: BlogHeader2,
-  };
-  return _createMdxContentComps;
-}
-
+import { loadCom_ } from "../../utils/mdx/eval";
 import type { PageContext } from "../../../gatsby-config";
+import type { MDXContent } from "../../utils/mdx/eval";
+import { gen_BlogHeader2 } from "../../3rd/mdx-header";
 
 type Prop = {
   pageContext: PageContext;
@@ -34,7 +13,7 @@ type Prop = {
 
 const BlogList = React.memo(function BlogList({ pageContext }: Prop) {
   const [Blogs, setBlogs] = React.useState<MDXContent[]>([]);
-console.log(pageContext);
+  // console.log(pageContext);
 
   React.useEffect(() => {
     let ignore = false;
@@ -58,7 +37,7 @@ console.log(pageContext);
         {[...Blogs, ...(pageContext.slots || [])].map((node, idx) => (
           <li key={idx}>
             {node({
-              components: genCom_(node.context),
+              components: gen_BlogHeader2(node.context),
             })}
           </li>
         ))}

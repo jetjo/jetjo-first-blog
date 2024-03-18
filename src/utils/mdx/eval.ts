@@ -42,5 +42,7 @@ export async function loadCom_({ code, ...ctx }: Node) {
       : await evaluate(pathToFileURL(ctx.fullPath))
   ) as MDXModule;
   Content.context ||= ctx;
+  // console.log(Content);
+  
   return Content;
 }
