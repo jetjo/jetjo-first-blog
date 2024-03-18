@@ -1,5 +1,5 @@
 import type { GatsbyConfig } from "gatsby";
-import { Node } from "./mdx/eval.mts";
+import { MDXContent, Node } from "./src/utils/mdx/eval.mts";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -23,4 +23,8 @@ export type Context = {
   fullPath: string;
 };
 
-export type PageContext = { title: string; nodes: Node[] };
+export type PageContext = {
+  title: string;
+  nodes?: Node[];
+  slots?: MDXContent[];
+};

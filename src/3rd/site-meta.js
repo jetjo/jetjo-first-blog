@@ -1,4 +1,4 @@
-import config from "../../gatsby-config.ts";
+import config from "../../gatsby-config";
 
 function getSiteMeta() {
   return {

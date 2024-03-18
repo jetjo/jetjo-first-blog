@@ -2,9 +2,9 @@ import * as React from "react";
 import SEO from "../../feature/seo";
 import Layout from "../../layout";
 // import { resolve } from "url";
-import { loadCom_ } from "../../../mdx/eval.mts";
-import { parseMDXHeader } from "../../../mdx/compile.mjs";
-import type { MDXContent } from "../../../mdx/eval.mts";
+import { loadCom_ } from "../../utils/mdx/eval.mts";
+import { parseMDXHeader } from "../../utils/mdx/compile.mjs";
+import type { MDXContent } from "../../utils/mdx/eval.mts";
 
 function genCom_(context) {
   function BlogHeader2(prop) {
@@ -34,11 +34,12 @@ type Prop = {
 
 const BlogList = React.memo(function BlogList({ pageContext }: Prop) {
   const [Blogs, setBlogs] = React.useState<MDXContent[]>([]);
+console.log(pageContext);
 
   React.useEffect(() => {
     let ignore = false;
     const load = async () => {
-      if (ignore) return;
+      if (ignore || !pageContext.nodes) return;
       const b = [];
       for (const node of pageContext.nodes) {
         b.push(await loadCom_(node));
@@ -54,7 +55,7 @@ const BlogList = React.memo(function BlogList({ pageContext }: Prop) {
   return (
     <Layout pageTitle={pageContext.title}>
       <ul>
-        {Blogs.map((node, idx) => (
+        {[...Blogs, ...(pageContext.slots || [])].map((node, idx) => (
           <li key={idx}>
             {node({
               components: genCom_(node.context),

@@ -9,7 +9,7 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "NODE_OPTIONS='--no-deprecation' gatsby develop",
+    "develop": "NODE_OPTIONS='-r ts-node/register --loader ts-node/esm --no-deprecation  --no-warnings' gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -19,6 +19,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
+    "file-url": "^4.0.0",
     "gatsby": "^5.13.3",
     "gatsby-plugin-image": "^3.13.1",
     "gatsby-plugin-mdx": "^5.13.1",
@@ -30,10 +31,13 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@tsconfig/node16": "^16.1.1",
     "@types/node": "^20.11.28",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2",
     "typescript": "^5.4.2"
   }
 }
