@@ -3,7 +3,7 @@ import { parseMDXHeader } from "../utils/mdx/compile.mjs";
 
 export function gen_BlogHeader2(context) {
   function BlogHeader2(prop) {
-    const { title, slug, date } = JSON.parse(parseMDXHeader(prop.children));
+    const { title, date } = JSON.parse(parseMDXHeader(prop.children));
     return (
       <div>
         <a href={context.path}>
@@ -18,5 +18,17 @@ export function gen_BlogHeader2(context) {
   const _createMdxContentComps = {
     h2: BlogHeader2,
   };
-  return _createMdxContentComps;
+  return proxy(_createMdxContentComps);
 }
+
+const keys = ["h2", "wrapper"];
+
+const proxy = (_com_s, context) => {
+  const res = new Proxy(_com_s, {
+    get: (target, prop, receiver) => {
+      if (keys.includes(prop)) return Reflect.get(target, prop, receiver);
+      return Reflect.get(context._components, prop, receiver);
+    },
+  });
+  return res;
+};

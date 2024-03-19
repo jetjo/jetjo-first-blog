@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "jet-jo-s-blog",
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "author": "jetjo",
   "keywords": [
     "gatsby"
@@ -25,6 +25,7 @@
     "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-sharp": "^5.13.1",
     "gatsby-source-filesystem": "^5.13.1",
+    "lodash": "^4.17.21",
     "node-polyfill-webpack-plugin": "^3.0.0",
     "object.assign": "^4.1.5",
     "react": "^18.2.0",
@@ -35,6 +36,7 @@
     "@types/node": "^20.11.28",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "react-refresh-typescript": "^2.0.9",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",

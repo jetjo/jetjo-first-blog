@@ -1,5 +1,5 @@
 import { createRequire } from "module";
-import { fileURLToPath, pathToFileURL } from "url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { opendir } from "node:fs/promises";
 import _path, { dirname } from "path";
 
@@ -40,15 +40,23 @@ export function withWebpackContext(require = createRequire(import.meta.url)) {
   return require;
 }
 
+const contextBucket = new Map();
+
+const findContext = (dir, glob) => {
+  const key = `${dir}:${glob}`;
+  return contextBucket.get(key);
+};
+const require = withWebpackContext();
+
 /**
  * @returns {Promise<import('./gatsby-config').Context[]>}
  */
-export async function getContext(
-  dir,
-  glob,
-  { isSubPath, basePath, loads } = {}
-) {
+export async function getContext(dir, glob, opt = {}) {
+  const { isSubPath, basePath, loads } = opt;
   const absDir = _path.resolve(import.meta.dirname, dir);
+  // prettier-ignore
+  const context = findContext(absDir, glob) || (await require.context(absDir, true, glob));
+  contextBucket.set(`${absDir}:${glob}`, context);
 
   const getPath = (fullPath = "") => {
     const relP = fullPath.slice(absDir.length);
@@ -61,27 +69,24 @@ export async function getContext(
   };
 
   const getLoads = async (ctx) => {
-    // return {}
-    if (!Array.isArray(loads)) return {};
     const load = loads.find((l) => l.identifier === ctx.identifier);
     if (!load) return {};
-    const { default: def, isGroup } = await import(
-      pathToFileURL(load.fullPath)
-    );
+    // prettier-ignore
+    const { default: def, isGroup } = await import(pathToFileURL(load.fullPath).href);
+    // const { default: def, isGroup } = require(load.fullPath);
     return isGroup ? { loads: def } : { load: def };
   };
 
-  const context = await withWebpackContext().context(absDir, true, glob);
   const res = context.keys().map((key) => ({
     fullPath: key,
     ...getPath(key, absDir),
-    // name: key.match(/\/([^\/\.]+)(?:\..*)+$/)[1],
   })); // as Context[];
+
+  if (!Array.isArray(loads)) return res;
 
   for (const ctx of res) {
     Object.assign(ctx, await getLoads(ctx));
   }
 
-  // console.log(context, '=====================');
   return res;
 }

@@ -1,10 +1,15 @@
 import _path, { dirname } from "path";
 
 import type { Context } from "../../../gatsby-config";
+import type { Node } from "../../utils/mdx/eval";
 import { getContext } from "../../../bundle-helper.mjs";
 import { compileMDX } from "../../../mdx/compile.mjs";
 import { createRequire } from "module";
 import { fileURLToPath } from "url";
+// import { FragmentDef } from "../../layout/Fragment.tsx";
+// import * as pkg from '../../layout/Fragment.tsx';
+// const { FragmentDef } = pkg;
+// import * as _runtime from "react/jsx-runtime";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -30,9 +35,10 @@ export default async ({ path: pagePath, fullPath: page }: Context) => {
     }
   );
   for (const ctx of blogsCtx) {
-    const node = await compileMDX(ctx);
+    const node = (await compileMDX(ctx)) as unknown as Node;
     // const slots = []; // await loadCom_s(blogsCtx); 此段代码运行在编译时, 产生的函数引用无法传递给浏览器运行时
     const { id, name, path, fullPath } = ctx;
+    node.runTime = {  } as any;
     opts.push({
       path,
       component: page,

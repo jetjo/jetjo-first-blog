@@ -1,4 +1,8 @@
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshTypeScript = require('react-refresh-typescript');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   module: {
@@ -10,14 +14,15 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              transpileOnly: true,
-              happyPackMode: true,
-              // appendTsSuffixTo: [/TS\.vue$/],
+              transpileOnly: isDevelopment,
+              happyPackMode: isDevelopment,
+              getCustomTransformers: () => ({
+                before: [isDevelopment && ReactRefreshTypeScript()].filter(Boolean),
+              }),
             },
           },
         ],
-        exclude:
-          /node_modules\/(?!(ant-design-vue|bootstrap|bootstrap-vue-3)\/).*/,
+        exclude: /node_modules/,
       },
     ],
   },

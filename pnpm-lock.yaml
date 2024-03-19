@@ -29,6 +29,9 @@ dependencies:
   gatsby-source-filesystem:
     specifier: ^5.13.1
     version: 5.13.1(gatsby@5.13.3)
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   node-polyfill-webpack-plugin:
     specifier: ^3.0.0
     version: 3.0.0(webpack@5.90.3)
@@ -55,6 +58,9 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.22
     version: 18.2.22
+  react-refresh-typescript:
+    specifier: ^2.0.9
+    version: 2.0.9(react-refresh@0.14.0)(typescript@5.4.2)
   ts-loader:
     specifier: ^9.5.1
     version: 9.5.1(typescript@5.4.2)(webpack@5.90.3)
@@ -10858,10 +10864,19 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
+  /react-refresh-typescript@2.0.9(react-refresh@0.14.0)(typescript@5.4.2):
+    resolution: {integrity: sha512-chAnOO4vpxm/3WkgOVmti+eN8yUtkJzeGkOigV6UA9eDFz12W34e/SsYe2H5+RwYJ3+sfSZkVbiXcG1chEBxlg==}
+    peerDependencies:
+      react-refresh: 0.10.x || 0.11.x || 0.12.x || 0.13.x || 0.14.x
+      typescript: ^4.8 || ^5.0
+    dependencies:
+      react-refresh: 0.14.0
+      typescript: 5.4.2
+    dev: true
+
   /react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /react-server-dom-webpack@0.0.0-experimental-c8b778b7f-20220825(react@18.2.0)(webpack@5.90.3):
     resolution: {integrity: sha512-JyCjbp6ZvkH/T0EuVPdceYlC8u5WqWDSJr2KxDvc81H2eJ+7zYUN++IcEycnR2F+HmER8QVgxfotnIx352zi+w==}

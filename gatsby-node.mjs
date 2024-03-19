@@ -29,7 +29,6 @@ export async function createPages({ actions, graphql, reporter }) {
       context: load && (await load(ctx)),
     });
   }
-  console.log(opts, "++++++++++++++++++++++++++");
   opts.forEach((o) => actions.createPage(o));
 }
 
@@ -47,6 +46,9 @@ export const onCreateWebpackConfig = ({
   });
   tsLoader.use.unshift(loaders.js());
   actions.setWebpackConfig({
+    infrastructureLogging: {
+      level: "error", // 'warn',
+    },
     // resolve: {
     //   fallback: {
     //     url: false,
